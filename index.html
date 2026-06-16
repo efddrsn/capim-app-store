@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Capim App Store — Catálogo de Apps</title>
+<style>
+  :root {
+    --green: #00a868;
+    --green-dark: #00875a;
+    --green-soft: #e6f7f0;
+    --ink: #0f2a22;
+    --muted: #5b7068;
+    --bg: #f4f8f6;
+    --card: #ffffff;
+    --border: #e2ebe7;
+    --shadow: 0 1px 2px rgba(15,42,34,.06), 0 8px 24px rgba(15,42,34,.06);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+    color: #fff;
+    padding: 48px 24px 40px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header h1 { margin: 0 0 8px; font-size: 34px; letter-spacing: -.5px; }
+  header p { margin: 0; opacity: .92; font-size: 16px; max-width: 640px; line-height: 1.5; }
+  .header-badge {
+    display: inline-block; background: rgba(255,255,255,.18);
+    padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    margin-bottom: 16px; backdrop-filter: blur(4px);
+  }
+  .controls {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(244,248,246,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+  }
+  .controls-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  #search {
+    flex: 1; min-width: 220px;
+    padding: 11px 16px; border: 1px solid var(--border); border-radius: 10px;
+    font-size: 15px; background: #fff; color: var(--ink);
+  }
+  #search:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px var(--green-soft); }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    border: 1px solid var(--border); background: #fff; color: var(--muted);
+    padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all .15s ease; white-space: nowrap;
+  }
+  .chip:hover { border-color: var(--green); color: var(--green-dark); }
+  .chip.active { background: var(--green); border-color: var(--green); color: #fff; }
+  main { max-width: 1180px; margin: 0 auto; padding: 32px 24px 64px; }
+  .area-section { margin-bottom: 44px; scroll-margin-top: 90px; }
+  .area-head { display: flex; align-items: baseline; gap: 12px; margin: 0 0 18px; }
+  .area-head h2 { margin: 0; font-size: 22px; letter-spacing: -.3px; }
+  .area-count { color: var(--muted); font-size: 14px; font-weight: 600; }
+  .grid {
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 22px; box-shadow: var(--shadow); display: flex; flex-direction: column;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 4px 8px rgba(15,42,34,.08), 0 18px 40px rgba(15,42,34,.12); }
+  .card h3 { margin: 0 0 6px; font-size: 18px; letter-spacing: -.2px; }
+  .owner { color: var(--green-dark); font-size: 13px; font-weight: 600; margin: 0 0 14px; display: flex; align-items: center; gap: 6px; }
+  .owner svg { flex: none; }
+  .desc { color: var(--muted); font-size: 14.5px; line-height: 1.55; margin: 0 0 18px; flex: 1; }
+  .links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 9px;
+    transition: all .15s ease;
+  }
+  .btn-primary { background: var(--green); color: #fff; }
+  .btn-primary:hover { background: var(--green-dark); }
+  .btn-ghost { background: var(--green-soft); color: var(--green-dark); }
+  .btn-ghost:hover { background: #d4f0e3; }
+  .empty { text-align: center; color: var(--muted); padding: 60px 20px; font-size: 16px; }
+  footer { text-align: center; color: var(--muted); font-size: 13px; padding: 32px 24px 48px; }
+  .tag { display:inline-block; font-size: 11px; font-weight:700; text-transform: uppercase; letter-spacing:.4px;
+    color: var(--green-dark); background: var(--green-soft); padding: 3px 9px; border-radius: 6px; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="header-badge">Capim · Catálogo Interno</span>
+    <h1>Capim App Store</h1>
+    <p>Catálogo dos apps internos construídos no Capim Challenge 2026. Links de acesso, descrição e responsável, organizados por área.</p>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <input id="search" type="search" placeholder="Buscar por app, responsável ou descrição…" autocomplete="off" />
+    <div class="filters" id="filters"></div>
+  </div>
+</div>
+
+<main id="catalog"></main>
+
+<footer>
+  <span id="footer-count"></span> · Capim App Store
+</footer>
+
+<script>
+const APPS = [
+  { name: "Portal de Cessão FIDC", owner: "Gustavo Nakasuka Sanches", area: "Finanças & Contábil",
+    desc: "Conferência da cessão de recebíveis ao FIDC, automatizando a checagem do processo financeiro.",
+    deck: "https://drive.google.com/drive/folders/1cxJVSULTf7risiwQmuHkhSSVaAa92Kex" },
+  { name: "Capina (IA-CAPINA)", owner: "Shaiene Toth + Henrique Mazarin + Lenise Kiil", area: "Finanças & Contábil",
+    desc: "Fluxo de caixa e conciliação financeira: classificador de lançamentos Iugu e máscaras Omie, com 10 integrações em produção.",
+    deck: "https://drive.google.com/drive/folders/1n5tGhtUO5Hw93NkZL-kVwMGuyXTML-6e" },
+  { name: "Sistema Contábil (razão)", owner: "Juliana Mello + Marcio Andrade", area: "Finanças & Contábil",
+    desc: "Reconciliação contábil do razão, atacando uma dor real do fechamento contábil.",
+    deck: "https://drive.google.com/file/d/1ENOnXSnx4zpPamoDDTrXiO5zLuxlW29x/view",
+    video: "https://drive.google.com/file/d/1HXIJleY4FSJt4bMLyXD9LVVwaG8QL0HM/view" },
+  { name: "Hermes", owner: "Gabriel Axel + Augusto Ribeiro + Giovanna Megumi", area: "Finanças & Contábil",
+    desc: "FP&A: prévia da RMR com classificação por Vision, structured output, loop de aprendizado e auditoria de custo. Processou 9 meses reais.",
+    deck: "https://drive.google.com/file/d/1erQpRwGtntL-rMO50slhwhgEMyYQht5x/view",
+    video: "https://drive.google.com/file/d/125o5eVhjMsfPpr2uurgIiAgA0ylRvwv7/view" },
+
+  { name: "Rating de clínicas", owner: "Wu Kam Long + Gerson Kumagaia", area: "Crédito, Cobrança & Risco",
+    desc: "Motor de rating de risco/crédito de clínicas (SQL e regras), com resumo gerado por LLM. Em uso na função core de crédito.",
+    deck: "https://drive.google.com/file/d/1Nz5KARIdzeDzENafICeTASMtyj_K5jPw/view",
+    video: "https://drive.google.com/file/d/1qOb3cRA_bSG9c3QukAQCg1skS8CkptiD/view" },
+  { name: "Negativação CAPIX", owner: "Joao Arce", area: "Crédito, Cobrança & Risco",
+    desc: "Automação da negativação no portal Serasa via browser automation (Claude/Cowork). Em produção no CAPIX.",
+    deck: "https://drive.google.com/file/d/1yOltBTu3nmNwK_HIVMEHuX0C0nin2pT-/view",
+    video: "https://drive.google.com/file/d/1rem1OPQO85PgcRuu32qCAgKKHrbWHqe_/view" },
+  { name: "CapimLoto", owner: "Guilherme Agostinho", area: "Crédito, Cobrança & Risco",
+    desc: "Copiloto de cobrança no BO com simulação determinística + orquestrador MCP (camada única de MCP da empresa) e RAG com citação.",
+    deck: "https://drive.google.com/file/d/1-vNjtCkm5owibKqWGccnIdk2WalcDC9k/view",
+    video: "https://drive.google.com/file/d/1XnnIZ-VKtNKJ3A-A_vzeCG2FlGE0Icxl/view" },
+  { name: "Portal de Prevenção", owner: "Bruna Ferraz + Gabriel Soliguetti", area: "Crédito, Cobrança & Risco",
+    desc: "PLD/antifraude com ~159 fluxos n8n e pré-aprovação para o Comercial. Segurança transacional crítica.",
+    deck: "https://drive.google.com/file/d/1NEngScpyH40HiinZy3pN8TxIDhmq_s-4/view",
+    video: "https://drive.google.com/file/d/1P2ZVMtkX6bkKnjGCPmpu-_ZXdi4LN3pm/view" },
+
+  { name: "Cockpit ClinicIQ", owner: "Robson Manoel", area: "Customer Success & Suporte",
+    desc: "Análise de churn/retenção de clínicas por perfil de uso. LLM orquestra narrativa e roteamento com fallback, sobre skills plugáveis.",
+    deck: "https://drive.google.com/drive/folders/11b4rKZIA2uenoGIHBMWjnPS6P1E8DIhW" },
+  { name: "GreenLight", owner: "Millena Fogaca + Samantha Tamashiro", area: "Customer Success & Suporte",
+    desc: "Dashboard de Customer Success (Snowflake) acionável, com fluxos de reativação via WhatsApp. Construído via Claude por pessoa não-técnica.",
+    deck: "https://drive.google.com/drive/folders/1xNIO2Gxe0iW7wQjpFMV_jomHtx2P48Ot" },
+  { name: "Solução Capim (pendências)", owner: "Thiane Lira", area: "Customer Success & Suporte",
+    desc: "Notificação automática de pendências para clínicas (similaridade + regex + template). Rodou em 59 clínicas.",
+    deck: "https://drive.google.com/file/d/14VCw9CS-SDSa_kcfGQGhK7nTPHEIZN5w/view",
+    video: "https://drive.google.com/file/d/1ZfYsj7LPHilTiBeg3GoFGoV4BWoe5oQb/view" },
+  { name: "Projeto N3 (Carlos)", owner: "Carlos Henrique Moreira + Tiago Santos", area: "Customer Success & Suporte",
+    desc: "Automação do atendimento N3 (suporte técnico) com uso de IA bem avançado.",
+    deck: "https://drive.google.com/file/d/124yH6LsoafyEAIAZWHpqSqliCr41AaZY/view" },
+  { name: "Suporte CS — Knowledge Dashboard", owner: "Lucas Magalhães + Neto + Nicole Neves", area: "Customer Success & Suporte",
+    desc: "Checklist de migração e credenciamento para o time de Suporte/CS.",
+    deck: "https://drive.google.com/file/d/1KcUJ9eq8Bhcpw9pAReSQenlcrdQF5dB5/view",
+    video: "https://drive.google.com/file/d/1zTM5QowbOKe5ERyCrv5t5NyQ1wNR6dGZ/view" },
+
+  { name: "LP Builder", owner: "Wellington Carneiro", area: "Marketing & Growth",
+    desc: "Skill AI-native que gera e audita landing pages com frameworks de conversão e inteligência competitiva, para reduzir CAC.",
+    deck: "https://drive.google.com/file/d/1bK9nwePfCiUYTW92CrfPi8e4VI2BDGZy/view",
+    video: "https://drive.google.com/file/d/11ANvYtYAIlw6sEBaSEelZEldtEZi1JH4/view" },
+  { name: "MGM Agent", owner: "Amauri Junior + Stefany Bertolacini", area: "Marketing & Growth",
+    desc: "Deduplicação e associação de contatos no HubSpot por telefone (member-get-member). Em produção com ~18 usuários.",
+    deck: "https://drive.google.com/file/d/1uZOlTsFTUCSSRatNB8ayQi63qW5tKPt-/view",
+    video: "https://drive.google.com/file/d/16m-4iNqJOM4PnRadvgbg2HonI8_rms7t/view" },
+  { name: "Captação de Leads (N8N)", owner: "Leonardo Germano + Larissa Avila + Jhonny Eustaquio", area: "Marketing & Growth",
+    desc: "Captação de leads via n8n + Google Maps API.",
+    deck: "https://drive.google.com/file/d/1aJHF_KsLdmmpWSAtIGeujkwQZZZTWRIY/view",
+    video: "https://drive.google.com/file/d/1r6-sNQsjAylLAtnPxF11yYnHoYbuiT7-/view" },
+
+  { name: "CaPlus (calculadora de taxas)", owner: "Matheus Machado + Marcos Vitriano + Yasmin Pasqualini", area: "Comercial & Produto",
+    desc: "Calculadora de taxas POS com governança embutida; Vision lê a proposta do concorrente e faz cadastro automático. Parcialmente em produção.",
+    deck: "https://drive.google.com/file/d/1Jb-xDAGPoWebPdT6F8hOWMvMA15HMoKP/view",
+    video: "https://drive.google.com/file/d/1y1wMVi89AMzdQBUsvHYuIzNZIvAPB5eW/view" },
+  { name: "Capim Daily Briefing", owner: "Andre Agostinho + Ana de Oliveira + Michel Rodrigues", area: "Comercial & Produto",
+    desc: "Briefing diário para o dentista (dados → LLM → WhatsApp). Porta de entrada externa; piloto na Clínica 62.",
+    deck: "https://drive.google.com/file/d/1zuSqh-5tdBOMsfn_a9R5a555k3pola_d/view",
+    video: "https://drive.google.com/file/d/14Jca9VBADlsuRHgmdqQfKoG-V6r-pRCy/view" },
+  { name: "Radar de Oportunidades (README)", owner: "Giovanna Ambrozio", area: "Comercial & Produto",
+    desc: "Discovery e síntese multi-fonte de oportunidades, com agentes por fonte e mecanismo anti-alucinação.",
+    deck: "https://drive.google.com/file/d/1-0XzEAnoER41tq8PB6qgk2G2k7fZhP6S/view",
+    video: "https://drive.google.com/file/d/1TQzJHHy28ejT31uM6yy7XxgpB3lDYme2/view" },
+
+  { name: "CapZap", owner: "Jabison Rafael", area: "Plataforma & Engenharia",
+    desc: "Infraestrutura de canal WhatsApp: motor próprio em Golang, anti-ban, 5000+ instâncias. Motor oficial em produção, substitui fornecedores.",
+    deck: "https://drive.google.com/drive/folders/1Ujgh-Ae01_tBTsBc_pcjoLIqNXDbn4GP" },
+  { name: "NoBubble", owner: "Hugo Gallo", area: "Plataforma & Engenharia",
+    desc: "Substitui o Bubble (~R$24k/ano) por solução em HTML + Apps Script, com economia real e baixo esforço.",
+    deck: "https://drive.google.com/drive/folders/1s83qdkVa7gDIAbR2Zj-AYHA5DX0Jice2" },
+  { name: "Documentação doc-viva (1-Pager)", owner: "Luca Severo", area: "Plataforma & Engenharia",
+    desc: "Documentação viva para agentes (Diátaxis/C4/arc42/AGENTS.md), vendor-neutral, com benchmark medido (-95% de raciocínio).",
+    deck: "https://drive.google.com/file/d/1h0bL0iAydjDfUrDTm30M46ZUvNKmCoWl/view",
+    video: "https://drive.google.com/file/d/1SydTMFqrmSkdHr-9do5dzC-W2DIXa4SN/view" },
+  { name: "Metabase Toolkit (README)", owner: "Daniel Gurgel", area: "Plataforma & Engenharia",
+    desc: "Toolkit de Metabase operável via MCP por linguagem natural (prepare→commit), com dependency graph e impact analysis. Milhares de cards.",
+    deck: "https://drive.google.com/file/d/1LthPF1ZoOblNHD0Df7OytSNfpo0hWs26/view",
+    video: "https://drive.google.com/file/d/1txAaPVMiBt_FWegvS2lPQyeWdXiVIOoA/view" },
+  { name: "PaPIM", owner: "Thaina Schichi + Hugo Gallo", area: "Plataforma & Engenharia",
+    desc: "Copilotos proativos no canal + análise de sentimento, integrados ao Slack.",
+    deck: "https://drive.google.com/drive/folders/1pyiomojWvkTDsUM5ICcdSRtrbTJokWvC" },
+];
+
+const AREA_ORDER = [
+  "Finanças & Contábil",
+  "Crédito, Cobrança & Risco",
+  "Customer Success & Suporte",
+  "Marketing & Growth",
+  "Comercial & Produto",
+  "Plataforma & Engenharia",
+];
+
+const userIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+const linkIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+const playIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+
+let activeArea = "all";
+let query = "";
+
+function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function render() {
+  const catalog = document.getElementById("catalog");
+  const q = query.trim().toLowerCase();
+  let total = 0;
+  let html = "";
+
+  for (const area of AREA_ORDER) {
+    if (activeArea !== "all" && activeArea !== area) continue;
+    const items = APPS.filter(a => a.area === area).filter(a => {
+      if (!q) return true;
+      return (a.name + " " + a.owner + " " + a.desc).toLowerCase().includes(q);
+    });
+    if (!items.length) continue;
+    total += items.length;
+
+    html += `<section class="area-section">
+      <div class="area-head"><h2>${escapeHtml(area)}</h2><span class="area-count">${items.length} app${items.length>1?'s':''}</span></div>
+      <div class="grid">`;
+    for (const a of items) {
+      let links = `<a class="btn btn-primary" href="${a.deck}" target="_blank" rel="noopener">${linkIcon} Acessar</a>`;
+      if (a.video) links += `<a class="btn btn-ghost" href="${a.video}" target="_blank" rel="noopener">${playIcon} Vídeo</a>`;
+      html += `<article class="card">
+        <span class="tag">${escapeHtml(a.area)}</span>
+        <h3>${escapeHtml(a.name)}</h3>
+        <p class="owner">${userIcon} ${escapeHtml(a.owner)}</p>
+        <p class="desc">${escapeHtml(a.desc)}</p>
+        <div class="links">${links}</div>
+      </article>`;
+    }
+    html += `</div></section>`;
+  }
+
+  catalog.innerHTML = total ? html : `<div class="empty">Nenhum app encontrado para "<strong>${escapeHtml(query)}</strong>".</div>`;
+  document.getElementById("footer-count").textContent = `${APPS.length} apps em ${AREA_ORDER.length} áreas`;
+}
+
+function buildFilters() {
+  const el = document.getElementById("filters");
+  const mk = (label, val) => `<button class="chip${val===activeArea?' active':''}" data-area="${val}">${label}</button>`;
+  el.innerHTML = mk("Todas", "all") + AREA_ORDER.map(a => mk(a, a)).join("");
+  el.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => {
+    activeArea = c.dataset.area;
+    buildFilters(); render();
+  }));
+}
+
+document.getElementById("search").addEventListener("input", e => { query = e.target.value; render(); });
+buildFilters();
+render();
+</script>
+</body>
+</html>

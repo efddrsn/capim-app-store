@@ -1,0 +1,14 @@
+{
+  "name": "capim-app-store",
+  "version": "1.0.0",
+  "description": "Catálogo interno de apps do Capim Challenge 2026",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}
