@@ -4,119 +4,103 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Capim App Store — Catálogo de Apps</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2359399E'/%3E%3Cg fill='%23fff'%3E%3Crect x='7' y='7' width='8' height='8' rx='2.5'/%3E%3Crect x='17' y='7' width='8' height='8' rx='2.5' fill-opacity='.6'/%3E%3Crect x='7' y='17' width='8' height='8' rx='2.5' fill-opacity='.6'/%3E%3Crect x='17' y='17' width='8' height='8' rx='2.5'/%3E%3C/g%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap" /></noscript>
 <style>
+  /* ============================================================
+     Capim Design System — foundation
+     Fonte: capim-ds-mcp (foundation.tokens.json + componentes + logos)
+     Marca: roxo #59399e + lima #d9f363 · ink #201f26
+     Tipografia: Red Hat Display (títulos) · Roboto (texto)
+     ============================================================ */
   :root {
-    /* ── Capim Design System · tokens extraídos do Figma "Capim Design System" ── */
-    /* Brand — Capim Purple */
-    --purple-900: #4a3082;
-    --purple-800: #59399e; /* primary */
-    --purple-700: #6b47b8; /* gradiente / acento */
-    --purple-500: #8b6fd4;
-    --purple-100: #e9e4f7;
-    --purple-50:  #f5f5fd; /* tint */
-    /* Neutros — Gray (cool) */
-    --gray-900: #3a3941; /* títulos */
-    --gray-700: #4d4b59; /* corpo */
-    --gray-500: #79767f; /* secundário */
-    --gray-300: #b9b7c2; /* desabilitado */
-    --gray-200: #e5e4ea; /* bordas */
-    --gray-100: #efeef1;
-    --gray-50:  #f7f7f8; /* fundo do app */
-    --white: #ffffff;
-
-    /* Semânticos */
-    --primary: var(--purple-800);
-    --primary-hover: var(--purple-900);
-    --primary-tint: var(--purple-50);
-    --ink: var(--gray-900);
-    --body: var(--gray-700);
-    --muted: var(--gray-500);
-    --bg: var(--gray-50);
-    --card: var(--white);
-    --border: var(--gray-200);
-
-    /* Sombras — Capim Shadow/Level-1 e Level-2 (#9190A0) */
-    --shadow-1: 0 1px 4px rgba(145,144,160,.08), 0 1px 1px rgba(145,144,160,.16);
-    --shadow-2: 0 4px 12px rgba(145,144,160,.08), 0 1px 2px rgba(145,144,160,.16);
-    --shadow-lift: 0 12px 32px rgba(145,144,160,.18), 0 2px 6px rgba(145,144,160,.12);
-
-    /* Raio */
-    --radius-sm: 8px;  /* botões (DS) */
-    --radius-md: 10px;
-    --radius-lg: 16px; /* cards */
-
+    /* Marca — Roxo (primário) */
+    --c-purple-900: #221540; --c-purple-800: #32205f; --c-purple-700: #3a2666;
+    --c-purple-600: #59399e; --c-purple-300: #ab9de8; --c-purple-100: #eeecfb;
+    /* Marca — Lima (acento) */
+    --c-lime-600: #a6cd15; --c-lime-500: #bee41e; --c-lime-400: #d9f363;
+    --c-lime-100: #f5fccb; --c-lime-ink: #33400f;
+    /* Neutros / ink */
+    --c-ink: #201f26; --c-ink-2: #444152; --c-muted: #79778c; --c-disabled: #bbb8cc;
+    --c-border: #e9e9f2; --c-surface: #f5f5fa; --c-white: #ffffff;
+    /* Status */
+    --c-info: #3de4f5; --c-success: #119538; --c-danger: #dd3c3c;
     /* Tipografia */
-    --font: "Encode Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-heading: "Red Hat Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-body: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    /* Raio */
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-pill: 999px;
+    /* Sombra (DS Nível 1 / 2 / 3) */
+    --shadow-1: 0px 1px 4px 0px rgba(145,144,160,.08);
+    --shadow-2: 0px 4px 12px 0px rgba(145,144,160,.08);
+    --shadow-3: 0px 8px 32px 0px rgba(32,31,38,.2);
+    /* Aliases semânticos da app */
+    --bg: var(--c-surface); --card: var(--c-white); --ink: var(--c-ink);
+    --muted: var(--c-muted); --border: var(--c-border);
+    --primary: var(--c-purple-600); --primary-dark: var(--c-purple-700);
+    --primary-soft: var(--c-purple-100);
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: var(--font);
-    font-weight: 400;
+    font-family: var(--font-body);
     background: var(--bg);
-    color: var(--body);
+    color: var(--ink);
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
   }
-  ::selection { background: var(--purple-100); color: var(--purple-900); }
-
   header {
-    background:
-      radial-gradient(1200px 400px at 12% -40%, rgba(255,255,255,.18), transparent 60%),
-      linear-gradient(135deg, var(--purple-700) 0%, var(--purple-800) 48%, var(--purple-900) 100%);
+    background: linear-gradient(135deg, var(--c-purple-600) 0%, var(--c-purple-800) 100%);
     color: #fff;
-    padding: 48px 24px 44px;
+    padding: 44px 24px 40px;
+    position: relative;
+  }
+  header::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+    background: linear-gradient(90deg, var(--c-lime-400), var(--c-lime-500));
   }
   .wrap { max-width: 1180px; margin: 0 auto; }
-  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-  .brand-mark {
-    width: 40px; height: 40px; border-radius: 12px;
-    background: rgba(255,255,255,.16);
-    display: inline-flex; align-items: center; justify-content: center;
-    color: #fff; backdrop-filter: blur(4px);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+  .brand-logo { height: 38px; width: auto; display: block; margin-bottom: 22px; }
+  header h1 {
+    font-family: var(--font-heading); font-weight: 900;
+    margin: 0 0 10px; font-size: 40px; line-height: 1.05; letter-spacing: -.5px;
   }
+  header p { margin: 0; opacity: .9; font-size: 16px; max-width: 640px; line-height: 1.55; }
   .header-badge {
-    display: inline-block; background: rgba(255,255,255,.16);
-    padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
-    letter-spacing: .2px; backdrop-filter: blur(4px);
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(217,243,99,.16); color: var(--c-lime-400);
+    padding: 5px 13px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 700;
+    margin-bottom: 16px; border: 1px solid rgba(217,243,99,.32);
   }
-  header h1 { margin: 0 0 8px; font-size: 34px; font-weight: 600; letter-spacing: -.5px; }
-  header p { margin: 0; opacity: .92; font-size: 16px; max-width: 640px; line-height: 1.5; }
-
+  .header-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--c-lime-400); }
   .controls {
     position: sticky; top: 0; z-index: 20;
-    background: rgba(247,247,248,.88); backdrop-filter: blur(10px);
+    background: rgba(245,245,250,.9); backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
     padding: 16px 24px;
   }
   .controls-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
   #search {
     flex: 1; min-width: 220px;
-    padding: 11px 16px; border: 1px solid var(--border); border-radius: var(--radius-md);
-    font-family: var(--font); font-size: 15px; background: #fff; color: var(--ink);
-    transition: border-color .15s ease, box-shadow .15s ease;
+    padding: 11px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    font-family: var(--font-body); font-size: 15px; background: #fff; color: var(--ink);
   }
-  #search::placeholder { color: var(--muted); }
-  #search:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px var(--purple-50); }
-
+  #search::placeholder { color: var(--c-disabled); }
+  #search:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
   .filters { display: flex; gap: 8px; flex-wrap: wrap; }
   .chip {
-    border: 1px solid var(--border); background: #fff; color: var(--gray-700);
-    padding: 8px 14px; border-radius: 999px; font-family: var(--font);
-    font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s ease; white-space: nowrap;
+    font-family: var(--font-body);
+    border: 1px solid var(--border); background: #fff; color: var(--muted);
+    padding: 8px 14px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: all .15s ease; white-space: nowrap;
   }
-  .chip:hover { border-color: var(--primary); color: var(--primary); background: var(--purple-50); }
+  .chip:hover { border-color: var(--primary); color: var(--primary); }
   .chip.active { background: var(--primary); border-color: var(--primary); color: #fff; }
-
   main { max-width: 1180px; margin: 0 auto; padding: 32px 24px 64px; }
   .area-section { margin-bottom: 44px; scroll-margin-top: 90px; }
   .area-head { display: flex; align-items: baseline; gap: 12px; margin: 0 0 18px; }
-  .area-head h2 { margin: 0; font-size: 22px; font-weight: 600; color: var(--ink); letter-spacing: -.3px; }
+  .area-head h2 { font-family: var(--font-heading); font-weight: 800; margin: 0; font-size: 24px; letter-spacing: -.3px; color: var(--c-ink); }
   .area-count { color: var(--muted); font-size: 14px; font-weight: 600; }
   .grid {
     display: grid; gap: 18px;
@@ -127,37 +111,41 @@
     padding: 22px; box-shadow: var(--shadow-1); display: flex; flex-direction: column;
     transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
   }
-  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); border-color: var(--purple-100); }
-  .card h3 { margin: 0 0 6px; font-size: 18px; font-weight: 600; color: var(--ink); letter-spacing: -.2px; }
-  .owner { color: var(--primary); font-size: 13px; font-weight: 600; margin: 0 0 14px; display: flex; align-items: center; gap: 6px; }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--c-purple-300); }
+  .card h3 { font-family: var(--font-heading); font-weight: 800; margin: 0 0 6px; font-size: 18px; letter-spacing: -.2px; color: var(--c-ink); }
+  .owner { color: var(--primary); font-size: 13px; font-weight: 700; margin: 0 0 14px; display: flex; align-items: center; gap: 6px; }
   .owner svg { flex: none; }
-  .desc { color: var(--body); font-size: 14.5px; line-height: 1.55; margin: 0 0 18px; flex: 1; }
+  .desc { color: var(--c-ink-2); font-size: 14.5px; line-height: 1.55; margin: 0 0 18px; flex: 1; }
   .links { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn {
     display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
-    font-family: var(--font); font-size: 13px; font-weight: 600; padding: 9px 15px; border-radius: var(--radius-sm);
-    transition: all .15s ease;
+    font-family: var(--font-body); font-size: 13px; font-weight: 700; padding: 9px 15px; border-radius: var(--radius-sm);
+    transition: all .15s ease; border: 1px solid transparent;
   }
-  .btn-primary { background: var(--primary); color: #fff; box-shadow: var(--shadow-1); }
-  .btn-primary:hover { background: var(--primary-hover); }
-  .btn-ghost { background: var(--purple-50); color: var(--primary); }
-  .btn-ghost:hover { background: var(--purple-100); }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-ghost { background: var(--primary-soft); color: var(--primary); }
+  .btn-ghost:hover { background: #e2dcf7; }
   .empty { text-align: center; color: var(--muted); padding: 60px 20px; font-size: 16px; }
   footer { text-align: center; color: var(--muted); font-size: 13px; padding: 32px 24px 48px; }
-  .tag { display:inline-block; font-size: 11px; font-weight:700; text-transform: uppercase; letter-spacing:.4px;
-    color: var(--primary); background: var(--purple-50); padding: 3px 9px; border-radius: 6px; margin-bottom: 12px; }
+  footer strong { color: var(--c-ink-2); font-weight: 700; }
+  .tag { display: inline-block; align-self: flex-start; font-family: var(--font-body); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
+    color: var(--primary); background: var(--primary-soft); padding: 3px 9px; border-radius: 6px; margin-bottom: 12px; }
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <div class="brand">
-      <span class="brand-mark" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7.5" height="7.5" rx="2.4"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2.4" fill-opacity=".6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2.4" fill-opacity=".6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2.4"/></svg>
-      </span>
-      <span class="header-badge">Capim · Catálogo Interno</span>
-    </div>
-    <h1>Capim App Store</h1>
+    <svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 450" fill="#fff" role="img" aria-label="Capim">
+      <path d="M522.73,143q-46.68,0-85.65,23.15v243h51.31V316.23q21.62,20.46,54.79,20.45a88,88,0,0,0,31.64-5.6,67.89,67.89,0,0,0,25.46-17q10.82-11.39,16.79-29.33t6-41.09q0-49-26.24-74.85T522.73,143ZM560.54,281.5Q549.37,293.86,532,293.85a42.18,42.18,0,0,1-24.69-7.52q-10.8-7.53-14.86-17t-4.05-16V193.53q15.44-7.71,35.88-7.71a55.28,55.28,0,0,1,16.79,2.51A42.69,42.69,0,0,1,555.33,196q6.38,5.21,11.39,16.4t5,30.1Q571.73,269.15,560.54,281.5Z"/>
+      <path d="M240.86,168.84q-26.25,25.86-26.24,74.85,0,23.15,6,41.09t16.79,29.33a67.89,67.89,0,0,0,25.46,17,88,88,0,0,0,31.64,5.6c22.12,0,40.38-10.34,54.79-24l8.09,19.35h43.22V166.14Q361.62,143,314.94,143,267.09,143,240.86,168.84Zm108.42,84.5q0,6.55-4,16t-14.86,17a42.18,42.18,0,0,1-24.69,7.52q-17.37,0-28.55-12.35t-11.19-39q0-18.91,5-30.1T282.34,196a42.69,42.69,0,0,1,14.27-7.71,55.28,55.28,0,0,1,16.79-2.51q20.44,0,35.88,7.71Z"/>
+      <path d="M679.82,40.89a41.35,41.35,0,1,0,41.34,41.35A41.4,41.4,0,0,0,679.82,40.89Zm0,61.44A20.09,20.09,0,1,1,699.9,82.24,20.12,20.12,0,0,1,679.82,102.33Z"/>
+      <path d="M176.76,287.34q-15.51,7.23-35.89,7.25a58.57,58.57,0,0,1-17.15-2.46,44.31,44.31,0,0,1-14.58-7.59q-6.49-5.12-11.62-16.11t-5.13-29.57q0-18.59,5.13-29.58t11.62-16.11a44.31,44.31,0,0,1,14.58-7.59,58.57,58.57,0,0,1,17.15-2.46q20.38,0,35.89,7.25l27.4-38.59A176.75,176.75,0,0,0,142.44,141q-48.87,0-75.66,25.41Q40.29,191.53,40,238.86q.31,47.29,26.78,72.41,26.79,25.41,75.66,25.41a176.75,176.75,0,0,0,61.72-10.75Z"/>
+      <path d="M679.82,152.22a76.54,76.54,0,0,1-26.1-4.56V332.05h52.19V147.65A76.29,76.29,0,0,1,679.82,152.22Z"/>
+      <path d="M964,143c-28,0-47,12.32-57.09,26.81C896.08,153.13,877.83,143,850.46,143c-28,0-46.28,12-56.07,26.44l-8.95-21.36H746.08v184h51.79V237.16c0-20.37,9.35-44.15,35.7-44.15,27.84,0,33.68,21.25,33.68,39.08v100h51.24V232.82c0-19.82,11-39.81,35.7-39.81,21.4,0,33.67,14.24,33.67,39.08v100H1040V219.78C1040,173.77,1011,143,964,143Z"/>
+    </svg>
+    <span class="header-badge">Catálogo Interno · Capim Challenge 2026</span>
+    <h1>App Store</h1>
     <p>Catálogo dos apps internos construídos no Capim Challenge 2026. Links de acesso, descrição e responsável, organizados por área.</p>
   </div>
 </header>

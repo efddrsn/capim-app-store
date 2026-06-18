@@ -24,11 +24,14 @@ Hospedado no Railway (build via Nixpacks, `node server.js`). Healthcheck em `/he
 
 ## Identidade visual
 
-A interface segue o **Design System da Capim** (Figma: _Capim Design System_).
-Tokens aplicados via CSS custom properties em `index.html`:
+A interface segue o **Design System da Capim** (fonte: `capim-ds-mcp` —
+`foundation.tokens.json` + componentes + logos). Tokens aplicados via CSS
+custom properties em `index.html`:
 
-- **Marca — Capim Purple:** `#59399E` (primary), `#4A3082` (hover/gradiente), `#F5F5FD` (tint).
-- **Neutros — Gray (cool):** `#3A3941` (títulos), `#4D4B59` (corpo), `#79767F` (secundário), `#E5E4EA` (bordas), `#F7F7F8` (fundo).
-- **Tipografia:** Encode Sans (400/600), carregada via Google Fonts.
-- **Raio:** 8px (botões, conforme DS), 16px (cards).
-- **Sombras:** Shadow/Level-1 e Level-2 (cinza frio `#9190A0` em baixa opacidade).
+- **Marca — Roxo (primário):** `#59399E` (primary), com rampa `#221540` → `#32205f` → `#3a2666` → `#ab9de8` → `#eeecfb`.
+- **Marca — Lima (acento):** `#d9f363` / `#bee41e` / `#a6cd15`, usada na barra do header e detalhes.
+- **Neutros / ink:** `#201f26` (títulos), `#444152` (corpo), `#79778c` (secundário), `#e9e9f2` (bordas), `#f5f5fa` (fundo).
+- **Status:** info `#3de4f5`, success `#119538`, danger `#dd3c3c`.
+- **Tipografia:** Red Hat Display (títulos) + Roboto (texto), via Google Fonts.
+- **Raio:** 8px (botões/inputs), 12px, 16px (cards), pill (chips).
+- **Sombras:** Níveis 1/2/3 (cinza frio `#9190A0` / ink em baixa opacidade).
