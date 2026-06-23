@@ -1,0 +1,115 @@
+// Dados de fallback (seed) usados quando o Notion não está configurado
+// (sem NOTION_TOKEN / NOTION_DB_ID) ou indisponível. Espelha o conteúdo
+// inicial da base do Notion. A fonte de verdade em produção é o Notion.
+//
+// Campos por app: name, owner, area, desc, deck, video, level (1|2|3).
+// Área = departamento real do(s) autor(es), conforme perfil no Slack/Notion.
+
+module.exports = [
+  // ── Engenharia ──
+  { name: "CapZap", owner: "Jabison Rafael", area: "Engenharia", level: 1,
+    desc: "Infraestrutura de canal WhatsApp: motor próprio em Golang, anti-ban, 5000+ instâncias. Motor oficial em produção, substitui fornecedores.",
+    deck: "https://drive.google.com/drive/folders/1Ujgh-Ae01_tBTsBc_pcjoLIqNXDbn4GP" },
+  { name: "Projeto N3 (Carlos)", owner: "Carlos Henrique Moreira + Tiago Santos", area: "Engenharia", level: 1,
+    desc: "Automação do atendimento N3 (suporte técnico) com uso de IA bem avançado.",
+    deck: "https://drive.google.com/file/d/124yH6LsoafyEAIAZWHpqSqliCr41AaZY/view" },
+  { name: "Documentação doc-viva (1-Pager)", owner: "Luca Severo", area: "Engenharia", level: 1,
+    desc: "Documentação viva para agentes (Diátaxis/C4/arc42/AGENTS.md), vendor-neutral, com benchmark medido (-95% de raciocínio).",
+    deck: "https://drive.google.com/file/d/1h0bL0iAydjDfUrDTm30M46ZUvNKmCoWl/view",
+    video: "https://drive.google.com/file/d/1SydTMFqrmSkdHr-9do5dzC-W2DIXa4SN/view" },
+  { name: "Capim Daily Briefing", owner: "Andre Agostinho + Ana de Oliveira + Michel Rodrigues", area: "Engenharia", level: 1,
+    desc: "Briefing diário para o dentista (dados → LLM → WhatsApp). Porta de entrada externa; piloto na Clínica 62.",
+    deck: "https://drive.google.com/file/d/1zuSqh-5tdBOMsfn_a9R5a555k3pola_d/view",
+    video: "https://drive.google.com/file/d/14Jca9VBADlsuRHgmdqQfKoG-V6r-pRCy/view" },
+
+  // ── Riscos & Crédito ──
+  { name: "Rating de clínicas", owner: "Wu Kam Long + Gerson Kumagaia", area: "Riscos & Crédito", level: 1,
+    desc: "Motor de rating de risco/crédito de clínicas (SQL e regras), com resumo gerado por LLM. Em uso na função core de crédito.",
+    deck: "https://drive.google.com/file/d/1Nz5KARIdzeDzENafICeTASMtyj_K5jPw/view",
+    video: "https://drive.google.com/file/d/1qOb3cRA_bSG9c3QukAQCg1skS8CkptiD/view" },
+  { name: "NoBubble", owner: "Hugo Gallo", area: "Riscos & Crédito", level: 1,
+    desc: "Substitui o Bubble (~R$24k/ano) por solução em HTML + Apps Script, com economia real e baixo esforço.",
+    deck: "https://drive.google.com/drive/folders/1s83qdkVa7gDIAbR2Zj-AYHA5DX0Jice2" },
+  { name: "Solução Capim (pendências)", owner: "Thiane Lira", area: "Riscos & Crédito", level: 1,
+    desc: "Notificação automática de pendências para clínicas (similaridade + regex + template). Rodou em 59 clínicas.",
+    deck: "https://drive.google.com/file/d/14VCw9CS-SDSa_kcfGQGhK7nTPHEIZN5w/view",
+    video: "https://drive.google.com/file/d/1ZfYsj7LPHilTiBeg3GoFGoV4BWoe5oQb/view" },
+  { name: "Negativação CAPIX", owner: "Joao Arce", area: "Riscos & Crédito", level: 1,
+    desc: "Automação da negativação no portal Serasa via browser automation (Claude/Cowork). Em produção no CAPIX.",
+    deck: "https://drive.google.com/file/d/1yOltBTu3nmNwK_HIVMEHuX0C0nin2pT-/view",
+    video: "https://drive.google.com/file/d/1rem1OPQO85PgcRuu32qCAgKKHrbWHqe_/view" },
+  { name: "CapimLoto", owner: "Guilherme Agostinho", area: "Riscos & Crédito", level: 1,
+    desc: "Copiloto de cobrança no BO com simulação determinística + orquestrador MCP (camada única de MCP da empresa) e RAG com citação.",
+    deck: "https://drive.google.com/file/d/1-vNjtCkm5owibKqWGccnIdk2WalcDC9k/view",
+    video: "https://drive.google.com/file/d/1XnnIZ-VKtNKJ3A-A_vzeCG2FlGE0Icxl/view" },
+  { name: "Portal de Prevenção", owner: "Bruna Ferraz + Gabriel Soliguetti", area: "Riscos & Crédito", level: 1,
+    desc: "PLD/antifraude com ~159 fluxos n8n e pré-aprovação para o Comercial. Segurança transacional crítica.",
+    deck: "https://drive.google.com/file/d/1NEngScpyH40HiinZy3pN8TxIDhmq_s-4/view",
+    video: "https://drive.google.com/file/d/1P2ZVMtkX6bkKnjGCPmpu-_ZXdi4LN3pm/view" },
+  { name: "Capix Analytics", owner: "Gabriela Pereira", area: "Riscos & Crédito", level: 1,
+    desc: "Dashboard de inteligência operacional da carteira Capix (parcelamento via Pix): visão em tempo real, aging, concentração de risco por clínica/analista e alertas de vencimento. Alimentado por Google Sheets + n8n, com relatório semanal automático no Slack.",
+    deck: "https://drive.google.com/drive/folders/1wuVS7pHzwv1ZqOfn4DdxlyR8AwFwxVLT",
+    video: "https://drive.google.com/file/d/1e4J6qymt5Q22u3z3ikJu9gIG7UQqJjGB/view" },
+
+  // ── Customer Success ──
+  { name: "GreenLight", owner: "Millena Fogaca + Samantha Tamashiro", area: "Customer Success", level: 1,
+    desc: "Dashboard de Customer Success (Snowflake) acionável, com fluxos de reativação via WhatsApp. Construído via Claude por pessoa não-técnica.",
+    deck: "https://drive.google.com/drive/folders/1xNIO2Gxe0iW7wQjpFMV_jomHtx2P48Ot" },
+  { name: "PaPIM (CSM AI Assistant)", owner: "Thaina Schichi + Hugo Gallo", area: "Customer Success", level: 1,
+    desc: "Copiloto de IA para onboarding de CS — extensão de Chrome no WhatsApp Web. Sugere respostas baseadas no Playbook e no contexto da conversa, mostra o momento da jornada da clínica (M1, POS, BNPL/BPU) sem abrir Metabase/HubSpot, classifica sentimento e gera dashboard de gestão. Em produção no onboarding.",
+    deck: "https://drive.google.com/drive/folders/1pyiomojWvkTDsUM5ICcdSRtrbTJokWvC",
+    video: "https://drive.google.com/file/d/1NsYz8hSKbyZ1h9h-VpCSN0oaUozQ1EC8/view" },
+  { name: "Suporte CS — Knowledge Dashboard", owner: "Lucas Magalhães + Neto + Nicole Neves", area: "Customer Success", level: 1,
+    desc: "Checklist de migração e credenciamento para o time de Suporte/CS.",
+    deck: "https://drive.google.com/file/d/1KcUJ9eq8Bhcpw9pAReSQenlcrdQF5dB5/view",
+    video: "https://drive.google.com/file/d/1zTM5QowbOKe5ERyCrv5t5NyQ1wNR6dGZ/view" },
+
+  // ── Finanças ──
+  { name: "Portal de Cessão FIDC", owner: "Gustavo Nakasuka Sanches", area: "Finanças", level: 1,
+    desc: "Conferência da cessão de recebíveis ao FIDC, automatizando a checagem do processo financeiro.",
+    deck: "https://drive.google.com/drive/folders/1cxJVSULTf7risiwQmuHkhSSVaAa92Kex" },
+  { name: "Capina (IA-CAPINA)", owner: "Shaiene Toth + Henrique Mazarin + Lenise Kiil", area: "Finanças", level: 1,
+    desc: "Fluxo de caixa e conciliação financeira: classificador de lançamentos Iugu e máscaras Omie, com 10 integrações em produção.",
+    deck: "https://drive.google.com/drive/folders/1n5tGhtUO5Hw93NkZL-kVwMGuyXTML-6e" },
+  { name: "Sistema Contábil (razão)", owner: "Juliana Mello + Marcio Andrade", area: "Finanças", level: 1,
+    desc: "Reconciliação contábil do razão, atacando uma dor real do fechamento contábil.",
+    deck: "https://drive.google.com/file/d/1ENOnXSnx4zpPamoDDTrXiO5zLuxlW29x/view",
+    video: "https://drive.google.com/file/d/1HXIJleY4FSJt4bMLyXD9LVVwaG8QL0HM/view" },
+  { name: "Hermes", owner: "Gabriel Axel + Augusto Ribeiro + Giovanna Megumi", area: "Finanças", level: 1,
+    desc: "FP&A: prévia da RMR com classificação por Vision, structured output, loop de aprendizado e auditoria de custo. Processou 9 meses reais.",
+    deck: "https://drive.google.com/file/d/1erQpRwGtntL-rMO50slhwhgEMyYQht5x/view",
+    video: "https://drive.google.com/file/d/125o5eVhjMsfPpr2uurgIiAgA0ylRvwv7/view" },
+
+  // ── Comercial & Marketing ──
+  { name: "LP Builder", owner: "Wellington Carneiro", area: "Comercial & Marketing", level: 1,
+    desc: "Skill AI-native que gera e audita landing pages com frameworks de conversão e inteligência competitiva, para reduzir CAC.",
+    deck: "https://drive.google.com/file/d/1bK9nwePfCiUYTW92CrfPi8e4VI2BDGZy/view",
+    video: "https://drive.google.com/file/d/11ANvYtYAIlw6sEBaSEelZEldtEZi1JH4/view" },
+  { name: "MGM Agent", owner: "Amauri Junior + Stefany Bertolacini", area: "Comercial & Marketing", level: 1,
+    desc: "Deduplicação e associação de contatos no HubSpot por telefone (member-get-member). Em produção com ~18 usuários.",
+    deck: "https://drive.google.com/file/d/1uZOlTsFTUCSSRatNB8ayQi63qW5tKPt-/view",
+    video: "https://drive.google.com/file/d/16m-4iNqJOM4PnRadvgbg2HonI8_rms7t/view" },
+  { name: "Captação de Leads (N8N)", owner: "Leonardo Germano + Larissa Avila + Jhonny Eustaquio", area: "Comercial & Marketing", level: 1,
+    desc: "Captação de leads via n8n + Google Maps API.",
+    deck: "https://drive.google.com/file/d/1aJHF_KsLdmmpWSAtIGeujkwQZZZTWRIY/view",
+    video: "https://drive.google.com/file/d/1r6-sNQsjAylLAtnPxF11yYnHoYbuiT7-/view" },
+  { name: "CaPlus (calculadora de taxas)", owner: "Matheus Machado + Marcos Vitriano + Yasmin Pasqualini", area: "Comercial & Marketing", level: 1,
+    desc: "Calculadora de taxas POS com governança embutida; Vision lê a proposta do concorrente e faz cadastro automático. Parcialmente em produção.",
+    deck: "https://drive.google.com/file/d/1Jb-xDAGPoWebPdT6F8hOWMvMA15HMoKP/view",
+    video: "https://drive.google.com/file/d/1y1wMVi89AMzdQBUsvHYuIzNZIvAPB5eW/view" },
+
+  // ── Dados & Analytics ──
+  { name: "Cockpit ClinicIQ", owner: "Robson Manoel", area: "Dados & Analytics", level: 1,
+    desc: "Análise de churn/retenção de clínicas por perfil de uso. LLM orquestra narrativa e roteamento com fallback, sobre skills plugáveis.",
+    deck: "https://drive.google.com/drive/folders/11b4rKZIA2uenoGIHBMWjnPS6P1E8DIhW" },
+  { name: "Metabase Toolkit (README)", owner: "Daniel Gurgel", area: "Dados & Analytics", level: 1,
+    desc: "Toolkit de Metabase operável via MCP por linguagem natural (prepare→commit), com dependency graph e impact analysis. Milhares de cards.",
+    deck: "https://drive.google.com/file/d/1LthPF1ZoOblNHD0Df7OytSNfpo0hWs26/view",
+    video: "https://drive.google.com/file/d/1txAaPVMiBt_FWegvS2lPQyeWdXiVIOoA/view" },
+
+  // ── Produto ──
+  { name: "Radar de Oportunidades (README)", owner: "Giovanna Ambrozio", area: "Produto", level: 1,
+    desc: "Discovery e síntese multi-fonte de oportunidades, com agentes por fonte e mecanismo anti-alucinação.",
+    deck: "https://drive.google.com/file/d/1-0XzEAnoER41tq8PB6qgk2G2k7fZhP6S/view",
+    video: "https://drive.google.com/file/d/1TQzJHHy28ejT31uM6yy7XxgpB3lDYme2/view" },
+];

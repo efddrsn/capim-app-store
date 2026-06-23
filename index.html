@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Capim App Store — Catálogo de Apps</title>
+<title>Capim App Store — Catálogo & Graduação de Apps</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap" media="print" onload="this.media='all'" />
@@ -16,121 +16,168 @@
      Tipografia: Red Hat Display (títulos) · Roboto (texto)
      ============================================================ */
   :root {
-    /* Marca — Roxo (primário) */
     --c-purple-900: #221540; --c-purple-800: #32205f; --c-purple-700: #3a2666;
     --c-purple-600: #59399e; --c-purple-300: #ab9de8; --c-purple-100: #eeecfb;
-    /* Marca — Lima (acento) */
     --c-lime-600: #a6cd15; --c-lime-500: #bee41e; --c-lime-400: #d9f363;
     --c-lime-100: #f5fccb; --c-lime-ink: #33400f;
-    /* Neutros / ink */
     --c-ink: #201f26; --c-ink-2: #444152; --c-muted: #79778c; --c-disabled: #bbb8cc;
     --c-border: #e9e9f2; --c-surface: #f5f5fa; --c-white: #ffffff;
-    /* Status */
     --c-info: #3de4f5; --c-success: #119538; --c-danger: #dd3c3c;
-    /* Tipografia */
     --font-heading: "Red Hat Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --font-body: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    /* Raio */
     --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-pill: 999px;
-    /* Sombra (DS Nível 1 / 2 / 3) */
     --shadow-1: 0px 1px 4px 0px rgba(145,144,160,.08);
     --shadow-2: 0px 4px 12px 0px rgba(145,144,160,.08);
     --shadow-3: 0px 8px 32px 0px rgba(32,31,38,.2);
-    /* Aliases semânticos da app */
     --bg: var(--c-surface); --card: var(--c-white); --ink: var(--c-ink);
     --muted: var(--c-muted); --border: var(--c-border);
     --primary: var(--c-purple-600); --primary-dark: var(--c-purple-700);
     --primary-soft: var(--c-purple-100);
   }
   * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: var(--font-body);
-    background: var(--bg);
-    color: var(--ink);
-    -webkit-font-smoothing: antialiased;
-  }
+  body { margin: 0; font-family: var(--font-body); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  a { color: inherit; }
+
+  /* ── Header ── */
   header {
     background: linear-gradient(135deg, var(--c-purple-600) 0%, var(--c-purple-800) 100%);
-    color: #fff;
-    padding: 44px 24px 40px;
-    position: relative;
+    color: #fff; padding: 44px 24px 40px; position: relative;
   }
-  header::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
-    background: linear-gradient(90deg, var(--c-lime-400), var(--c-lime-500));
-  }
-  .wrap { max-width: 1180px; margin: 0 auto; }
+  header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: linear-gradient(90deg, var(--c-lime-400), var(--c-lime-500)); }
   .brand-logo { height: 38px; width: auto; display: block; margin-bottom: 22px; }
-  header h1 {
-    font-family: var(--font-heading); font-weight: 900;
-    margin: 0 0 10px; font-size: 40px; line-height: 1.05; letter-spacing: -.5px;
-  }
-  header p { margin: 0; opacity: .9; font-size: 16px; max-width: 640px; line-height: 1.55; }
-  .header-badge {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: rgba(217,243,99,.16); color: var(--c-lime-400);
-    padding: 5px 13px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 700;
-    margin-bottom: 16px; border: 1px solid rgba(217,243,99,.32);
-  }
+  header h1 { font-family: var(--font-heading); font-weight: 900; margin: 0 0 10px; font-size: 40px; line-height: 1.05; letter-spacing: -.5px; }
+  header p.lead { margin: 0; opacity: .92; font-size: 16px; max-width: 640px; line-height: 1.55; }
+  .header-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(217,243,99,.16); color: var(--c-lime-400); padding: 5px 13px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 700; margin-bottom: 16px; border: 1px solid rgba(217,243,99,.32); }
   .header-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--c-lime-400); }
-  .controls {
-    position: sticky; top: 0; z-index: 20;
-    background: rgba(245,245,250,.9); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 24px;
-  }
-  .controls-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-  #search {
-    flex: 1; min-width: 220px;
-    padding: 11px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm);
-    font-family: var(--font-body); font-size: 15px; background: #fff; color: var(--ink);
-  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+
+  /* ── Botões ── */
+  .btn { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; cursor: pointer; font-family: var(--font-body); font-size: 14px; font-weight: 700; padding: 11px 18px; border-radius: var(--radius-sm); transition: all .15s ease; border: 1px solid transparent; }
+  .btn-sm { font-size: 13px; padding: 9px 15px; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-lime { background: var(--c-lime-400); color: var(--c-lime-ink); }
+  .btn-lime:hover { background: var(--c-lime-500); }
+  .btn-ghost { background: var(--primary-soft); color: var(--primary); }
+  .btn-ghost:hover { background: #e2dcf7; }
+  .btn-on-dark { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.28); }
+  .btn-on-dark:hover { background: rgba(255,255,255,.2); }
+  .btn[disabled] { opacity: .55; cursor: not-allowed; }
+
+  /* ── Guia / Como funciona ── */
+  .guide { padding: 40px 24px 8px; }
+  .guide .eyebrow { font-family: var(--font-heading); font-weight: 800; color: var(--primary); font-size: 13px; letter-spacing: .8px; text-transform: uppercase; margin: 0 0 6px; }
+  .guide h2 { font-family: var(--font-heading); font-weight: 900; font-size: 28px; margin: 0 0 10px; letter-spacing: -.4px; }
+  .guide p.intro { color: var(--c-ink-2); font-size: 15.5px; line-height: 1.6; max-width: 760px; margin: 0 0 28px; }
+  .levels-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+  .level-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 22px 24px; box-shadow: var(--shadow-1); border-top: 4px solid var(--accent, var(--primary)); display: flex; flex-direction: column; }
+  .level-card .ribbon { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .level-card h3 { font-family: var(--font-heading); font-weight: 800; font-size: 19px; margin: 0; letter-spacing: -.2px; }
+  .level-card .tagline { color: var(--c-ink-2); font-size: 14px; line-height: 1.5; margin: 0 0 14px; }
+  .level-card .meta-line { font-size: 12.5px; font-weight: 700; color: var(--muted); margin: 0 0 12px; display: flex; align-items: center; gap: 6px; }
+  .level-card h4 { font-family: var(--font-heading); font-size: 12px; letter-spacing: .5px; text-transform: uppercase; color: var(--muted); margin: 14px 0 8px; }
+  .req-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; }
+  .req-list li { display: flex; gap: 8px; font-size: 13.5px; line-height: 1.45; color: var(--c-ink-2); }
+  .req-list li svg { flex: none; margin-top: 2px; color: var(--c-lime-600); }
+  .level-card .grad-note { margin-top: auto; padding-top: 16px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Badges de nível ── */
+  .lvl-badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .2px; padding: 4px 11px; border-radius: var(--radius-pill); white-space: nowrap; }
+  .lvl-1 { background: var(--c-lime-100); color: var(--c-lime-ink); border: 1px solid var(--c-lime-500); }
+  .lvl-2 { background: var(--primary-soft); color: var(--primary); border: 1px solid var(--c-purple-300); }
+  .lvl-3 { background: var(--c-purple-900); color: #fff; border: 1px solid var(--c-purple-900); }
+  .lvl-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .acc-1 { --accent: var(--c-lime-500); }
+  .acc-2 { --accent: var(--c-purple-600); }
+  .acc-3 { --accent: var(--c-purple-900); }
+
+  /* ── Controles (busca + filtros) ── */
+  .controls { position: sticky; top: 0; z-index: 20; background: rgba(245,245,250,.92); backdrop-filter: blur(8px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 24px; margin-top: 32px; }
+  .controls-inner { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  #search { flex: 1; min-width: 220px; padding: 11px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 15px; background: #fff; color: var(--ink); }
   #search::placeholder { color: var(--c-disabled); }
   #search:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
   .filters { display: flex; gap: 8px; flex-wrap: wrap; }
-  .chip {
-    font-family: var(--font-body);
-    border: 1px solid var(--border); background: #fff; color: var(--muted);
-    padding: 8px 14px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 700;
-    cursor: pointer; transition: all .15s ease; white-space: nowrap;
-  }
+  .filters .label { font-size: 12px; font-weight: 700; color: var(--muted); align-self: center; margin-right: 2px; }
+  .chip { font-family: var(--font-body); border: 1px solid var(--border); background: #fff; color: var(--muted); padding: 8px 14px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 700; cursor: pointer; transition: all .15s ease; white-space: nowrap; }
   .chip:hover { border-color: var(--primary); color: var(--primary); }
   .chip.active { background: var(--primary); border-color: var(--primary); color: #fff; }
-  main { max-width: 1180px; margin: 0 auto; padding: 32px 24px 64px; }
-  .area-section { margin-bottom: 44px; scroll-margin-top: 90px; }
-  .area-head { display: flex; align-items: baseline; gap: 12px; margin: 0 0 18px; }
-  .area-head h2 { font-family: var(--font-heading); font-weight: 800; margin: 0; font-size: 24px; letter-spacing: -.3px; color: var(--c-ink); }
-  .area-count { color: var(--muted); font-size: 14px; font-weight: 600; }
-  .grid {
-    display: grid; gap: 18px;
-    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-  }
-  .card {
-    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
-    padding: 22px; box-shadow: var(--shadow-1); display: flex; flex-direction: column;
-    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-  }
+
+  /* ── Catálogo ── */
+  main { padding: 28px 24px 64px; }
+  .level-section { margin-bottom: 44px; scroll-margin-top: 90px; }
+  .level-section-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 0 0 6px; }
+  .level-section-head h2 { font-family: var(--font-heading); font-weight: 900; margin: 0; font-size: 23px; letter-spacing: -.3px; }
+  .level-section-head .count { color: var(--muted); font-size: 14px; font-weight: 600; }
+  .level-section .blurb { color: var(--c-ink-2); font-size: 14px; margin: 0 0 18px; max-width: 720px; line-height: 1.5; }
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--shadow-1); display: flex; flex-direction: column; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
   .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--c-purple-300); }
+  .card .top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+  .tag { display: inline-block; font-family: var(--font-body); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: var(--primary); background: var(--primary-soft); padding: 3px 9px; border-radius: 6px; }
   .card h3 { font-family: var(--font-heading); font-weight: 800; margin: 0 0 6px; font-size: 18px; letter-spacing: -.2px; color: var(--c-ink); }
   .owner { color: var(--primary); font-size: 13px; font-weight: 700; margin: 0 0 14px; display: flex; align-items: center; gap: 6px; }
   .owner svg { flex: none; }
-  .desc { color: var(--c-ink-2); font-size: 14.5px; line-height: 1.55; margin: 0 0 18px; flex: 1; }
+  .desc { color: var(--c-ink-2); font-size: 14.5px; line-height: 1.55; margin: 0 0 14px; flex: 1; }
+  .card-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+  .pill { font-size: 11.5px; font-weight: 700; padding: 3px 9px; border-radius: var(--radius-pill); display: inline-flex; align-items: center; gap: 5px; }
+  .pill-sso { background: #e7f7ec; color: var(--c-success); }
+  .pill-crit { background: #fdecec; color: var(--c-danger); }
+  .pill-res { background: var(--c-surface); color: var(--c-ink-2); border: 1px solid var(--border); }
   .links { display: flex; gap: 8px; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
-    font-family: var(--font-body); font-size: 13px; font-weight: 700; padding: 9px 15px; border-radius: var(--radius-sm);
-    transition: all .15s ease; border: 1px solid transparent;
-  }
-  .btn-primary { background: var(--primary); color: #fff; }
-  .btn-primary:hover { background: var(--primary-dark); }
-  .btn-ghost { background: var(--primary-soft); color: var(--primary); }
-  .btn-ghost:hover { background: #e2dcf7; }
-  .empty { text-align: center; color: var(--muted); padding: 60px 20px; font-size: 16px; }
+  .empty { text-align: center; color: var(--muted); padding: 40px 20px; font-size: 15px; background: var(--card); border: 1px dashed var(--border); border-radius: var(--radius-lg); line-height: 1.6; }
+  .empty .btn { margin-top: 14px; }
+  .loading { text-align: center; color: var(--muted); padding: 70px 20px; font-size: 15px; }
+
   footer { text-align: center; color: var(--muted); font-size: 13px; padding: 32px 24px 48px; }
   footer strong { color: var(--c-ink-2); font-weight: 700; }
-  .tag { display: inline-block; align-self: flex-start; font-family: var(--font-body); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
-    color: var(--primary); background: var(--primary-soft); padding: 3px 9px; border-radius: 6px; margin-bottom: 12px; }
+  .notice { background: #fff8e6; border: 1px solid #f3e3a8; color: #7a5b00; font-size: 13px; padding: 10px 16px; border-radius: var(--radius-sm); margin: 16px auto 0; max-width: 1132px; }
+
+  /* ── Modal / formulário ── */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(32,31,38,.55); backdrop-filter: blur(3px); display: none; align-items: flex-start; justify-content: center; padding: 32px 16px; z-index: 50; overflow-y: auto; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-3); max-width: 620px; width: 100%; }
+  .modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 24px 26px 0; }
+  .modal-head h2 { font-family: var(--font-heading); font-weight: 900; font-size: 22px; margin: 0; letter-spacing: -.3px; }
+  .modal-head p { color: var(--muted); font-size: 13.5px; margin: 6px 0 0; line-height: 1.5; }
+  .modal-close { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 26px; line-height: 1; padding: 4px; }
+  form { padding: 18px 26px 26px; }
+  .seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+  .seg label { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px 10px; cursor: pointer; text-align: center; transition: all .15s ease; background: #fff; }
+  .seg label:hover { border-color: var(--c-purple-300); }
+  .seg input { position: absolute; opacity: 0; pointer-events: none; }
+  .seg label .t { font-family: var(--font-heading); font-weight: 800; font-size: 14px; display: block; }
+  .seg label .s { font-size: 11.5px; color: var(--muted); display: block; margin-top: 2px; }
+  .seg input:checked + .seg-body { }
+  .seg label.checked { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13px; font-weight: 700; color: var(--c-ink-2); margin-bottom: 6px; }
+  .field label .req { color: var(--c-danger); }
+  .field input[type=text], .field input[type=url], .field input[type=email], .field select, .field textarea {
+    width: 100%; padding: 10px 13px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    font-family: var(--font-body); font-size: 14.5px; background: #fff; color: var(--ink);
+  }
+  .field textarea { min-height: 76px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+  .field .hint { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .checkbox-row { display: flex; align-items: flex-start; gap: 10px; background: var(--c-surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; }
+  .checkbox-row input { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--primary); }
+  .checkbox-row label { font-size: 13.5px; color: var(--c-ink-2); font-weight: 500; margin: 0; }
+  .grp { border-top: 1px dashed var(--border); margin-top: 18px; padding-top: 16px; }
+  .grp-title { font-family: var(--font-heading); font-size: 12px; letter-spacing: .5px; text-transform: uppercase; color: var(--primary); margin: 0 0 12px; font-weight: 800; }
+  .form-actions { display: flex; gap: 10px; align-items: center; margin-top: 22px; }
+  .form-msg { font-size: 13.5px; line-height: 1.5; margin-top: 14px; padding: 12px 14px; border-radius: var(--radius-sm); display: none; }
+  .form-msg.err { display: block; background: #fdecec; color: var(--c-danger); border: 1px solid #f3c9c9; }
+  .form-msg.ok { display: block; background: #e7f7ec; color: var(--c-success); border: 1px solid #b9e3c5; }
+  .form-msg ul { margin: 6px 0 0; padding-left: 18px; }
+
+  @media (max-width: 560px) {
+    header h1 { font-size: 32px; }
+    .row-2 { grid-template-columns: 1fr; }
+    .seg { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -146,202 +193,323 @@
     </svg>
     <span class="header-badge">Catálogo Interno · Capim Challenge 2026</span>
     <h1>App Store</h1>
-    <p>Catálogo dos apps internos construídos no Capim Challenge 2026. Links de acesso, descrição e responsável, organizados por área.</p>
+    <p class="lead">O catálogo dos apps internos do Capim Challenge — com um sistema de <strong>graduação em 3 níveis</strong>. Publique seu projeto, dê visibilidade ao que construiu e gradue conforme ele amadurece em acesso, segurança e manutenção.</p>
+    <div class="hero-actions">
+      <button class="btn btn-lime" data-open-modal>＋ Submeter projeto</button>
+      <a class="btn btn-on-dark" href="#como-funciona">Como funciona</a>
+    </div>
   </div>
 </header>
 
+<!-- ── Guia: como funciona a graduação ── -->
+<section class="guide" id="como-funciona">
+  <div class="wrap">
+    <p class="eyebrow">Como funciona</p>
+    <h2>Os 3 níveis de graduação</h2>
+    <p class="intro">Todo projeto entra no catálogo e pode <strong>graduar de nível</strong> conforme amadurece — de uma vitrine aberta (Nível&nbsp;1) até uma ferramenta crítica com dono técnico e operação monitorada (Nível&nbsp;3). Quanto maior o nível, mais requisitos de acesso, segurança e manutenção — e mais confiança para o resto da empresa usar.</p>
+    <div class="levels-grid" id="levels-guide"></div>
+  </div>
+</section>
+
+<!-- ── Controles ── -->
 <div class="controls">
-  <div class="controls-inner">
+  <div class="controls-inner wrap">
     <input id="search" type="search" placeholder="Buscar por app, responsável ou descrição…" autocomplete="off" />
-    <div class="filters" id="filters"></div>
+    <div class="filters" id="level-filters"></div>
+    <div class="filters" id="area-filters"></div>
   </div>
 </div>
 
-<main id="catalog"></main>
+<main><div class="wrap" id="catalog"><div class="loading">Carregando catálogo…</div></div></main>
 
 <footer>
   <span id="footer-count"></span> · Capim App Store
+  <div id="notice-slot"></div>
 </footer>
 
+<!-- ── Modal de submissão ── -->
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h2 id="modal-title">Submeter projeto</h2>
+        <p>Escolha o nível de graduação. Quanto maior o nível, mais informações são exigidas — e os Níveis 2 e 3 passam por aprovação de um admin.</p>
+      </div>
+      <button class="modal-close" type="button" aria-label="Fechar" data-close-modal>&times;</button>
+    </div>
+    <form id="submit-form" novalidate>
+      <div class="seg" id="level-seg">
+        <label data-lvl="1"><input type="radio" name="level" value="1" checked /><span class="seg-body"><span class="t">Nível 1</span><span class="s">Catálogo aberto</span></span></label>
+        <label data-lvl="2"><input type="radio" name="level" value="2" /><span class="seg-body"><span class="t">Nível 2</span><span class="s">Primeira graduação</span></span></label>
+        <label data-lvl="3"><input type="radio" name="level" value="3" /><span class="seg-body"><span class="t">Nível 3</span><span class="s">Segurança & manutenção</span></span></label>
+      </div>
+
+      <div class="field"><label>Nome do app <span class="req">*</span></label><input type="text" name="name" maxlength="200" required /></div>
+      <div class="row-2">
+        <div class="field"><label>Responsável (dono) <span class="req">*</span></label><input type="text" name="owner" maxlength="200" required /><div class="hint">Quem mantém o projeto.</div></div>
+        <div class="field"><label>Área <span class="req">*</span></label><select name="area" required></select></div>
+      </div>
+      <div class="field"><label>Descrição <span class="req">*</span></label><textarea name="desc" maxlength="2000" required placeholder="O que o app faz e qual dor resolve."></textarea></div>
+      <div class="row-2">
+        <div class="field"><label>Deck / apresentação</label><input type="url" name="deck" placeholder="https://…" /></div>
+        <div class="field"><label>Vídeo</label><input type="url" name="video" placeholder="https://…" /></div>
+      </div>
+      <div class="field"><label>Seu e-mail</label><input type="email" name="email" placeholder="voce@capim.com.br" /><div class="hint">Para te avisarmos sobre a aprovação (opcional).</div></div>
+
+      <!-- Nível 2+ -->
+      <div class="grp lvl2-group" hidden>
+        <p class="grp-title">Requisitos do Nível 2</p>
+        <div class="field"><label>Link de acesso à ferramenta <span class="req">*</span></label><input type="url" name="accessUrl" placeholder="https://…" /><div class="hint">Onde a ferramenta roda / como acessar.</div></div>
+        <div class="field"><label>Repositório (codebase) <span class="req">*</span></label><input type="url" name="repoUrl" placeholder="https://github.com/…" /><div class="hint">Para concessão de acesso ao código.</div></div>
+        <div class="field"><label>Recursos / infraestrutura que usa <span class="req">*</span></label><textarea name="resources" placeholder="Ex.: banco Postgres X, n8n, API do HubSpot, Snowflake…"></textarea></div>
+        <div class="checkbox-row"><input type="checkbox" id="sso" name="sso" /><label for="sso">O acesso à ferramenta está protegido por <strong>SSO</strong> (login corporativo) configurado. <span class="req">*</span></label></div>
+      </div>
+
+      <!-- Nível 3 -->
+      <div class="grp lvl3-group" hidden>
+        <p class="grp-title">Requisitos do Nível 3</p>
+        <div class="row-2">
+          <div class="field"><label>Responsável técnico dedicado <span class="req">*</span></label><input type="text" name="techOwner" maxlength="200" /><div class="hint">Pessoa técnica que mantém em produção.</div></div>
+          <div class="field"><label>Criticidade <span class="req">*</span></label><select name="criticality"><option value="">—</option><option>Baixa</option><option>Média</option><option>Alta</option></select></div>
+        </div>
+        <div class="field"><label>Uso de tokens / credenciais <span class="req">*</span></label><textarea name="tokenUsage" placeholder="Quais segredos/tokens usa, onde ficam, rotação, escopo de acesso…"></textarea></div>
+      </div>
+
+      <div class="form-msg" id="form-msg"></div>
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit" id="submit-btn">Enviar submissão</button>
+        <button class="btn btn-ghost" type="button" data-close-modal>Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
-// Área = departamento real do(s) autor(es), conforme perfil no Slack/Notion.
-const APPS = [
-  // ── Engenharia ──
-  { name: "CapZap", owner: "Jabison Rafael", area: "Engenharia",
-    desc: "Infraestrutura de canal WhatsApp: motor próprio em Golang, anti-ban, 5000+ instâncias. Motor oficial em produção, substitui fornecedores.",
-    deck: "https://drive.google.com/drive/folders/1Ujgh-Ae01_tBTsBc_pcjoLIqNXDbn4GP" },
-  { name: "Projeto N3 (Carlos)", owner: "Carlos Henrique Moreira + Tiago Santos", area: "Engenharia",
-    desc: "Automação do atendimento N3 (suporte técnico) com uso de IA bem avançado.",
-    deck: "https://drive.google.com/file/d/124yH6LsoafyEAIAZWHpqSqliCr41AaZY/view" },
-  { name: "Documentação doc-viva (1-Pager)", owner: "Luca Severo", area: "Engenharia",
-    desc: "Documentação viva para agentes (Diátaxis/C4/arc42/AGENTS.md), vendor-neutral, com benchmark medido (-95% de raciocínio).",
-    deck: "https://drive.google.com/file/d/1h0bL0iAydjDfUrDTm30M46ZUvNKmCoWl/view",
-    video: "https://drive.google.com/file/d/1SydTMFqrmSkdHr-9do5dzC-W2DIXa4SN/view" },
-  { name: "Capim Daily Briefing", owner: "Andre Agostinho + Ana de Oliveira + Michel Rodrigues", area: "Engenharia",
-    desc: "Briefing diário para o dentista (dados → LLM → WhatsApp). Porta de entrada externa; piloto na Clínica 62.",
-    deck: "https://drive.google.com/file/d/1zuSqh-5tdBOMsfn_a9R5a555k3pola_d/view",
-    video: "https://drive.google.com/file/d/14Jca9VBADlsuRHgmdqQfKoG-V6r-pRCy/view" },
+const AREA_ORDER = ["Engenharia", "Riscos & Crédito", "Customer Success", "Finanças", "Comercial & Marketing", "Dados & Analytics", "Produto"];
 
-  // ── Riscos & Crédito ──
-  { name: "Rating de clínicas", owner: "Wu Kam Long + Gerson Kumagaia", area: "Riscos & Crédito",
-    desc: "Motor de rating de risco/crédito de clínicas (SQL e regras), com resumo gerado por LLM. Em uso na função core de crédito.",
-    deck: "https://drive.google.com/file/d/1Nz5KARIdzeDzENafICeTASMtyj_K5jPw/view",
-    video: "https://drive.google.com/file/d/1qOb3cRA_bSG9c3QukAQCg1skS8CkptiD/view" },
-  { name: "NoBubble", owner: "Hugo Gallo", area: "Riscos & Crédito",
-    desc: "Substitui o Bubble (~R$24k/ano) por solução em HTML + Apps Script, com economia real e baixo esforço.",
-    deck: "https://drive.google.com/drive/folders/1s83qdkVa7gDIAbR2Zj-AYHA5DX0Jice2" },
-  { name: "Solução Capim (pendências)", owner: "Thiane Lira", area: "Riscos & Crédito",
-    desc: "Notificação automática de pendências para clínicas (similaridade + regex + template). Rodou em 59 clínicas.",
-    deck: "https://drive.google.com/file/d/14VCw9CS-SDSa_kcfGQGhK7nTPHEIZN5w/view",
-    video: "https://drive.google.com/file/d/1ZfYsj7LPHilTiBeg3GoFGoV4BWoe5oQb/view" },
-  { name: "Negativação CAPIX", owner: "Joao Arce", area: "Riscos & Crédito",
-    desc: "Automação da negativação no portal Serasa via browser automation (Claude/Cowork). Em produção no CAPIX.",
-    deck: "https://drive.google.com/file/d/1yOltBTu3nmNwK_HIVMEHuX0C0nin2pT-/view",
-    video: "https://drive.google.com/file/d/1rem1OPQO85PgcRuu32qCAgKKHrbWHqe_/view" },
-  { name: "CapimLoto", owner: "Guilherme Agostinho", area: "Riscos & Crédito",
-    desc: "Copiloto de cobrança no BO com simulação determinística + orquestrador MCP (camada única de MCP da empresa) e RAG com citação.",
-    deck: "https://drive.google.com/file/d/1-vNjtCkm5owibKqWGccnIdk2WalcDC9k/view",
-    video: "https://drive.google.com/file/d/1XnnIZ-VKtNKJ3A-A_vzeCG2FlGE0Icxl/view" },
-  { name: "Portal de Prevenção", owner: "Bruna Ferraz + Gabriel Soliguetti", area: "Riscos & Crédito",
-    desc: "PLD/antifraude com ~159 fluxos n8n e pré-aprovação para o Comercial. Segurança transacional crítica.",
-    deck: "https://drive.google.com/file/d/1NEngScpyH40HiinZy3pN8TxIDhmq_s-4/view",
-    video: "https://drive.google.com/file/d/1P2ZVMtkX6bkKnjGCPmpu-_ZXdi4LN3pm/view" },
-  { name: "Capix Analytics", owner: "Gabriela Pereira", area: "Riscos & Crédito",
-    desc: "Dashboard de inteligência operacional da carteira Capix (parcelamento via Pix): visão em tempo real, aging, concentração de risco por clínica/analista e alertas de vencimento. Alimentado por Google Sheets + n8n, com relatório semanal automático no Slack.",
-    deck: "https://drive.google.com/drive/folders/1wuVS7pHzwv1ZqOfn4DdxlyR8AwFwxVLT",
-    video: "https://drive.google.com/file/d/1e4J6qymt5Q22u3z3ikJu9gIG7UQqJjGB/view" },
+const LEVELS = {
+  1: { name: "Nível 1 — Catálogo aberto", tagline: "Dê visibilidade ao que você construiu.", access: "Acesso aberto · publicação imediata",
+       blurb: "Vitrine aberta: qualquer pessoa publica e aparece na hora, sem aprovação. Basta ter um responsável.",
+       reqs: ["Ter um responsável (dono)", "Nome, área e descrição"],
+       grad: "Como entrar: clique em “Submeter projeto”, escolha Nível 1 e publique." },
+  2: { name: "Nível 2 — Primeira graduação", tagline: "Ferramenta validada, com acesso controlado.", access: "Requer aprovação de admin",
+       blurb: "A ferramenta já é usável por outras pessoas, com acesso controlado e código acessível.",
+       reqs: ["Tudo do Nível 1", "Link de acesso à ferramenta", "Repositório (codebase) para concessão de acesso", "Recursos/infra que o código usa", "SSO configurado"],
+       grad: "Como graduar: submeta como Nível 2. Um admin revisa e aprova (muda o Status no Notion)." },
+  3: { name: "Nível 3 — Segurança & manutenção", tagline: "Ferramenta crítica, com dono técnico e operação monitorada.", access: "Requer aprovação de admin",
+       blurb: "Ferramenta crítica para a operação: tem dono técnico dedicado, criticidade definida e gestão de segredos documentada.",
+       reqs: ["Tudo do Nível 2", "Responsável técnico dedicado", "Criticidade definida", "Uso de tokens/credenciais documentado"],
+       grad: "Como graduar: submeta como Nível 3 com o responsável técnico. Admin valida segurança e manutenção antes de aprovar." },
+};
 
-  // ── Customer Success ──
-  { name: "GreenLight", owner: "Millena Fogaca + Samantha Tamashiro", area: "Customer Success",
-    desc: "Dashboard de Customer Success (Snowflake) acionável, com fluxos de reativação via WhatsApp. Construído via Claude por pessoa não-técnica.",
-    deck: "https://drive.google.com/drive/folders/1xNIO2Gxe0iW7wQjpFMV_jomHtx2P48Ot" },
-  { name: "PaPIM (CSM AI Assistant)", owner: "Thaina Schichi + Hugo Gallo", area: "Customer Success",
-    desc: "Copiloto de IA para onboarding de CS — extensão de Chrome no WhatsApp Web. Sugere respostas baseadas no Playbook e no contexto da conversa, mostra o momento da jornada da clínica (M1, POS, BNPL/BPU) sem abrir Metabase/HubSpot, classifica sentimento e gera dashboard de gestão. Em produção no onboarding.",
-    deck: "https://drive.google.com/drive/folders/1pyiomojWvkTDsUM5ICcdSRtrbTJokWvC",
-    video: "https://drive.google.com/file/d/1NsYz8hSKbyZ1h9h-VpCSN0oaUozQ1EC8/view" },
-  { name: "Suporte CS — Knowledge Dashboard", owner: "Lucas Magalhães + Neto + Nicole Neves", area: "Customer Success",
-    desc: "Checklist de migração e credenciamento para o time de Suporte/CS.",
-    deck: "https://drive.google.com/file/d/1KcUJ9eq8Bhcpw9pAReSQenlcrdQF5dB5/view",
-    video: "https://drive.google.com/file/d/1zTM5QowbOKe5ERyCrv5t5NyQ1wNR6dGZ/view" },
+const icon = {
+  user: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+  link: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+  play: '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
+  code: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+  deck: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="2"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>',
+  lock: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+  check: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  alert: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+};
 
-  // ── Finanças ──
-  { name: "Portal de Cessão FIDC", owner: "Gustavo Nakasuka Sanches", area: "Finanças",
-    desc: "Conferência da cessão de recebíveis ao FIDC, automatizando a checagem do processo financeiro.",
-    deck: "https://drive.google.com/drive/folders/1cxJVSULTf7risiwQmuHkhSSVaAa92Kex" },
-  { name: "Capina (IA-CAPINA)", owner: "Shaiene Toth + Henrique Mazarin + Lenise Kiil", area: "Finanças",
-    desc: "Fluxo de caixa e conciliação financeira: classificador de lançamentos Iugu e máscaras Omie, com 10 integrações em produção.",
-    deck: "https://drive.google.com/drive/folders/1n5tGhtUO5Hw93NkZL-kVwMGuyXTML-6e" },
-  { name: "Sistema Contábil (razão)", owner: "Juliana Mello + Marcio Andrade", area: "Finanças",
-    desc: "Reconciliação contábil do razão, atacando uma dor real do fechamento contábil.",
-    deck: "https://drive.google.com/file/d/1ENOnXSnx4zpPamoDDTrXiO5zLuxlW29x/view",
-    video: "https://drive.google.com/file/d/1HXIJleY4FSJt4bMLyXD9LVVwaG8QL0HM/view" },
-  { name: "Hermes", owner: "Gabriel Axel + Augusto Ribeiro + Giovanna Megumi", area: "Finanças",
-    desc: "FP&A: prévia da RMR com classificação por Vision, structured output, loop de aprendizado e auditoria de custo. Processou 9 meses reais.",
-    deck: "https://drive.google.com/file/d/1erQpRwGtntL-rMO50slhwhgEMyYQht5x/view",
-    video: "https://drive.google.com/file/d/125o5eVhjMsfPpr2uurgIiAgA0ylRvwv7/view" },
-
-  // ── Comercial & Marketing ──
-  { name: "LP Builder", owner: "Wellington Carneiro", area: "Comercial & Marketing",
-    desc: "Skill AI-native que gera e audita landing pages com frameworks de conversão e inteligência competitiva, para reduzir CAC.",
-    deck: "https://drive.google.com/file/d/1bK9nwePfCiUYTW92CrfPi8e4VI2BDGZy/view",
-    video: "https://drive.google.com/file/d/11ANvYtYAIlw6sEBaSEelZEldtEZi1JH4/view" },
-  { name: "MGM Agent", owner: "Amauri Junior + Stefany Bertolacini", area: "Comercial & Marketing",
-    desc: "Deduplicação e associação de contatos no HubSpot por telefone (member-get-member). Em produção com ~18 usuários.",
-    deck: "https://drive.google.com/file/d/1uZOlTsFTUCSSRatNB8ayQi63qW5tKPt-/view",
-    video: "https://drive.google.com/file/d/16m-4iNqJOM4PnRadvgbg2HonI8_rms7t/view" },
-  { name: "Captação de Leads (N8N)", owner: "Leonardo Germano + Larissa Avila + Jhonny Eustaquio", area: "Comercial & Marketing",
-    desc: "Captação de leads via n8n + Google Maps API.",
-    deck: "https://drive.google.com/file/d/1aJHF_KsLdmmpWSAtIGeujkwQZZZTWRIY/view",
-    video: "https://drive.google.com/file/d/1r6-sNQsjAylLAtnPxF11yYnHoYbuiT7-/view" },
-  { name: "CaPlus (calculadora de taxas)", owner: "Matheus Machado + Marcos Vitriano + Yasmin Pasqualini", area: "Comercial & Marketing",
-    desc: "Calculadora de taxas POS com governança embutida; Vision lê a proposta do concorrente e faz cadastro automático. Parcialmente em produção.",
-    deck: "https://drive.google.com/file/d/1Jb-xDAGPoWebPdT6F8hOWMvMA15HMoKP/view",
-    video: "https://drive.google.com/file/d/1y1wMVi89AMzdQBUsvHYuIzNZIvAPB5eW/view" },
-
-  // ── Dados & Analytics ──
-  { name: "Cockpit ClinicIQ", owner: "Robson Manoel", area: "Dados & Analytics",
-    desc: "Análise de churn/retenção de clínicas por perfil de uso. LLM orquestra narrativa e roteamento com fallback, sobre skills plugáveis.",
-    deck: "https://drive.google.com/drive/folders/11b4rKZIA2uenoGIHBMWjnPS6P1E8DIhW" },
-  { name: "Metabase Toolkit (README)", owner: "Daniel Gurgel", area: "Dados & Analytics",
-    desc: "Toolkit de Metabase operável via MCP por linguagem natural (prepare→commit), com dependency graph e impact analysis. Milhares de cards.",
-    deck: "https://drive.google.com/file/d/1LthPF1ZoOblNHD0Df7OytSNfpo0hWs26/view",
-    video: "https://drive.google.com/file/d/1txAaPVMiBt_FWegvS2lPQyeWdXiVIOoA/view" },
-
-  // ── Produto ──
-  { name: "Radar de Oportunidades (README)", owner: "Giovanna Ambrozio", area: "Produto",
-    desc: "Discovery e síntese multi-fonte de oportunidades, com agentes por fonte e mecanismo anti-alucinação.",
-    deck: "https://drive.google.com/file/d/1-0XzEAnoER41tq8PB6qgk2G2k7fZhP6S/view",
-    video: "https://drive.google.com/file/d/1TQzJHHy28ejT31uM6yy7XxgpB3lDYme2/view" },
-];
-
-const AREA_ORDER = [
-  "Engenharia",
-  "Riscos & Crédito",
-  "Customer Success",
-  "Finanças",
-  "Comercial & Marketing",
-  "Dados & Analytics",
-  "Produto",
-];
-
-const userIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
-const linkIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
-const playIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-
-let activeArea = "all";
+let APPS = [];
+let levelFilter = "all";
+let areaFilter = "all";
 let query = "";
 
-function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function escapeHtml(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-function render() {
+// ── Guia ──
+function renderGuide() {
+  const el = document.getElementById("levels-guide");
+  el.innerHTML = [1, 2, 3].map(n => {
+    const L = LEVELS[n];
+    return `<div class="level-card acc-${n}">
+      <div class="ribbon"><span class="lvl-badge lvl-${n}"><span class="lvl-dot" style="background:currentColor;opacity:.6"></span>Nível ${n}</span></div>
+      <h3>${escapeHtml(L.name.split("— ")[1])}</h3>
+      <p class="tagline">${escapeHtml(L.tagline)}</p>
+      <p class="meta-line">${n === 1 ? icon.check : icon.lock} ${escapeHtml(L.access)}</p>
+      <h4>Requisitos</h4>
+      <ul class="req-list">${L.reqs.map(r => `<li>${icon.check}<span>${escapeHtml(r)}</span></li>`).join("")}</ul>
+      <p class="grad-note">${escapeHtml(L.grad)}</p>
+    </div>`;
+  }).join("");
+}
+
+// ── Filtros ──
+function renderFilters() {
+  const lf = document.getElementById("level-filters");
+  const mkL = (label, val) => `<button class="chip${val === levelFilter ? ' active' : ''}" data-lvl-filter="${val}">${label}</button>`;
+  lf.innerHTML = `<span class="label">Nível:</span>` + mkL("Todos", "all") + [1,2,3].map(n => mkL("N" + n, String(n))).join("");
+  lf.querySelectorAll("[data-lvl-filter]").forEach(c => c.addEventListener("click", () => { levelFilter = c.dataset.lvlFilter; renderFilters(); renderCatalog(); }));
+
+  const af = document.getElementById("area-filters");
+  const mkA = (label, val) => `<button class="chip${val === areaFilter ? ' active' : ''}" data-area-filter="${escapeHtml(val)}">${escapeHtml(label)}</button>`;
+  af.innerHTML = `<span class="label">Área:</span>` + mkA("Todas", "all") + AREA_ORDER.map(a => mkA(a, a)).join("");
+  af.querySelectorAll("[data-area-filter]").forEach(c => c.addEventListener("click", () => { areaFilter = c.dataset.areaFilter; renderFilters(); renderCatalog(); }));
+}
+
+function cardLinks(a) {
+  const out = [];
+  const primary = a.accessUrl || a.deck;
+  if (primary) out.push(`<a class="btn btn-sm btn-primary" href="${escapeHtml(primary)}" target="_blank" rel="noopener">${icon.link} Acessar</a>`);
+  if (a.deck && a.deck !== primary) out.push(`<a class="btn btn-sm btn-ghost" href="${escapeHtml(a.deck)}" target="_blank" rel="noopener">${icon.deck} Deck</a>`);
+  if (a.repoUrl) out.push(`<a class="btn btn-sm btn-ghost" href="${escapeHtml(a.repoUrl)}" target="_blank" rel="noopener">${icon.code} Código</a>`);
+  if (a.video) out.push(`<a class="btn btn-sm btn-ghost" href="${escapeHtml(a.video)}" target="_blank" rel="noopener">${icon.play} Vídeo</a>`);
+  return out.join("");
+}
+
+function cardMeta(a) {
+  const out = [];
+  if (a.sso) out.push(`<span class="pill pill-sso">${icon.lock} SSO</span>`);
+  if (a.level === 3 && a.criticality) out.push(`<span class="pill pill-crit">${icon.alert} Criticidade ${escapeHtml(a.criticality)}</span>`);
+  if ((a.level >= 2) && a.resources) out.push(`<span class="pill pill-res">Usa: ${escapeHtml(a.resources.length > 48 ? a.resources.slice(0,48) + "…" : a.resources)}</span>`);
+  return out.length ? `<div class="card-meta">${out.join("")}</div>` : "";
+}
+
+function renderCatalog() {
   const catalog = document.getElementById("catalog");
   const q = query.trim().toLowerCase();
-  let total = 0;
+  const match = (a) => {
+    if (areaFilter !== "all" && a.area !== areaFilter) return false;
+    if (!q) return true;
+    return (a.name + " " + a.owner + " " + a.desc + " " + (a.resources||"")).toLowerCase().includes(q);
+  };
+
   let html = "";
+  let shown = 0;
+  for (const n of [1, 2, 3]) {
+    if (levelFilter !== "all" && levelFilter !== String(n)) continue;
+    const L = LEVELS[n];
+    const items = APPS.filter(a => a.level === n).filter(match);
+    const filtersActive = areaFilter !== "all" || q;
 
-  for (const area of AREA_ORDER) {
-    if (activeArea !== "all" && activeArea !== area) continue;
-    const items = APPS.filter(a => a.area === area).filter(a => {
-      if (!q) return true;
-      return (a.name + " " + a.owner + " " + a.desc).toLowerCase().includes(q);
-    });
-    if (!items.length) continue;
-    total += items.length;
-
-    html += `<section class="area-section">
-      <div class="area-head"><h2>${escapeHtml(area)}</h2><span class="area-count">${items.length} app${items.length>1?'s':''}</span></div>
-      <div class="grid">`;
-    for (const a of items) {
-      let links = `<a class="btn btn-primary" href="${a.deck}" target="_blank" rel="noopener">${linkIcon} Acessar</a>`;
-      if (a.video) links += `<a class="btn btn-ghost" href="${a.video}" target="_blank" rel="noopener">${playIcon} Vídeo</a>`;
-      html += `<article class="card">
-        <span class="tag">${escapeHtml(a.area)}</span>
+    let inner;
+    if (items.length) {
+      shown += items.length;
+      inner = `<div class="grid">` + items.map(a => `<article class="card">
+        <div class="top"><span class="tag">${escapeHtml(a.area)}</span><span class="lvl-badge lvl-${n}">Nível ${n}</span></div>
         <h3>${escapeHtml(a.name)}</h3>
-        <p class="owner">${userIcon} ${escapeHtml(a.owner)}</p>
+        <p class="owner">${icon.user} ${escapeHtml(a.owner)}</p>
         <p class="desc">${escapeHtml(a.desc)}</p>
-        <div class="links">${links}</div>
-      </article>`;
+        ${cardMeta(a)}
+        <div class="links">${cardLinks(a)}</div>
+      </article>`).join("") + `</div>`;
+    } else if (filtersActive) {
+      continue; // não polui com seções vazias quando há filtro/busca
+    } else {
+      inner = `<div class="empty">Nenhum projeto no <strong>Nível ${n}</strong> ainda.<br>${escapeHtml(L.tagline)}<br><button class="btn btn-sm btn-ghost" data-open-modal data-level="${n}">Graduar um projeto para o Nível ${n}</button></div>`;
     }
-    html += `</div></section>`;
+
+    html += `<section class="level-section" id="nivel-${n}">
+      <div class="level-section-head"><h2>${escapeHtml(L.name)}</h2><span class="count">${items.length ? items.length + " app" + (items.length>1?"s":"") : ""}</span></div>
+      <p class="blurb">${escapeHtml(L.blurb)} <em>${escapeHtml(L.access)}.</em></p>
+      ${inner}
+    </section>`;
   }
 
-  catalog.innerHTML = total ? html : `<div class="empty">Nenhum app encontrado para "<strong>${escapeHtml(query)}</strong>".</div>`;
-  document.getElementById("footer-count").textContent = `${APPS.length} apps em ${AREA_ORDER.length} áreas`;
+  if (!shown && (areaFilter !== "all" || q)) {
+    html = `<div class="empty">Nenhum app encontrado${q ? ` para “<strong>${escapeHtml(query)}</strong>”` : ""}${areaFilter !== "all" ? ` em <strong>${escapeHtml(areaFilter)}</strong>` : ""}.</div>`;
+  }
+  catalog.innerHTML = html;
+  catalog.querySelectorAll("[data-open-modal]").forEach(b => b.addEventListener("click", () => openModal(b.dataset.level)));
+
+  const byLevel = [1,2,3].map(n => `${APPS.filter(a=>a.level===n).length} no N${n}`).join(" · ");
+  document.getElementById("footer-count").textContent = `${APPS.length} apps publicados — ${byLevel}`;
 }
 
-function buildFilters() {
-  const el = document.getElementById("filters");
-  const mk = (label, val) => `<button class="chip${val===activeArea?' active':''}" data-area="${val}">${label}</button>`;
-  el.innerHTML = mk("Todas", "all") + AREA_ORDER.map(a => mk(a, a)).join("");
-  el.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => {
-    activeArea = c.dataset.area;
-    buildFilters(); render();
-  }));
+// ── Modal ──
+const modal = document.getElementById("modal");
+const form = document.getElementById("submit-form");
+const formMsg = document.getElementById("form-msg");
+
+function syncLevelUI() {
+  const lvl = Number(form.elements["level"].value);
+  document.querySelectorAll("#level-seg label").forEach(l => l.classList.toggle("checked", l.dataset.lvl === String(lvl)));
+  form.querySelector(".lvl2-group").hidden = lvl < 2;
+  form.querySelector(".lvl3-group").hidden = lvl < 3;
 }
 
-document.getElementById("search").addEventListener("input", e => { query = e.target.value; render(); });
-buildFilters();
-render();
+function openModal(level) {
+  formMsg.className = "form-msg"; formMsg.innerHTML = "";
+  if (level) { const r = form.querySelector(`input[name=level][value="${level}"]`); if (r) r.checked = true; }
+  syncLevelUI();
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeModal() { modal.classList.remove("open"); document.body.style.overflow = ""; }
+
+document.querySelectorAll("[data-open-modal]").forEach(b => b.addEventListener("click", () => openModal(b.dataset.level)));
+document.querySelectorAll("[data-close-modal]").forEach(b => b.addEventListener("click", closeModal));
+modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); });
+form.level && form.querySelectorAll("input[name=level]").forEach(r => r.addEventListener("change", syncLevelUI));
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById("submit-btn");
+  const el = form.elements;
+  const v = (n) => (el[n] ? el[n].value : "");
+  const data = {
+    level: Number(el["level"].value),
+    name: v("name"), owner: v("owner"), area: v("area"), desc: v("desc"),
+    email: v("email"), deck: v("deck"), video: v("video"),
+    accessUrl: v("accessUrl"), repoUrl: v("repoUrl"), resources: v("resources"),
+    sso: el["sso"].checked, techOwner: v("techOwner"), criticality: v("criticality"), tokenUsage: v("tokenUsage"),
+  };
+  btn.disabled = true; btn.textContent = "Enviando…"; formMsg.className = "form-msg";
+  try {
+    const res = await fetch("/api/submit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+    const json = await res.json();
+    if (res.ok && json.ok) {
+      formMsg.className = "form-msg ok";
+      formMsg.textContent = json.message || "Submissão recebida!";
+      form.reset(); syncLevelUI();
+      if (json.status === "publicado") loadApps();
+      setTimeout(closeModal, 2200);
+    } else {
+      formMsg.className = "form-msg err";
+      const errs = (json.errors || ["Não foi possível enviar."]);
+      formMsg.innerHTML = "Corrija e tente de novo:" + "<ul>" + errs.map(x => `<li>${escapeHtml(x)}</li>`).join("") + "</ul>";
+    }
+  } catch (err) {
+    formMsg.className = "form-msg err";
+    formMsg.textContent = "Erro de conexão. Tente novamente.";
+  } finally {
+    btn.disabled = false; btn.textContent = "Enviar submissão";
+  }
+});
+
+// ── Carga de dados ──
+async function loadApps() {
+  try {
+    const res = await fetch("/api/apps");
+    const json = await res.json();
+    APPS = (json.apps || []).map(a => ({ ...a, level: Number(a.level) || 1 }));
+    renderCatalog();
+    const slot = document.getElementById("notice-slot");
+    if (json.notionConfigured === false) {
+      slot.innerHTML = `<div class="notice">⚙️ Backend do Notion ainda não configurado — exibindo o catálogo embutido (seed) e o envio de submissões está desabilitado. Veja o README para ativar.</div>`;
+    } else if (json.degraded) {
+      slot.innerHTML = `<div class="notice">⚠️ Não foi possível ler do Notion agora — exibindo o catálogo embutido temporariamente.</div>`;
+    } else { slot.innerHTML = ""; }
+  } catch (err) {
+    document.getElementById("catalog").innerHTML = `<div class="empty">Não foi possível carregar o catálogo. Recarregue a página.</div>`;
+  }
+}
+
+// ── Init ──
+(function init(){
+  // popula select de áreas
+  const sel = form.area;
+  sel.innerHTML = `<option value="">Selecione…</option>` + AREA_ORDER.map(a => `<option value="${escapeHtml(a)}">${escapeHtml(a)}</option>`).join("");
+  renderGuide();
+  renderFilters();
+  syncLevelUI();
+  document.getElementById("search").addEventListener("input", e => { query = e.target.value; renderCatalog(); });
+  loadApps();
+})();
 </script>
 </body>
 </html>
